@@ -49,5 +49,6 @@ public class Main {
 
     public void testCase(){
         controller.createChest("Chest1");
+        System.out.println(controller.chestInfo());
     }
 }

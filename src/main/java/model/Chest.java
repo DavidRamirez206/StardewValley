@@ -58,5 +58,11 @@ public class Chest {
         this.next = next;
     }
 
-
+    @Override
+    public String toString(){
+        return "chest number: " + chestNumber +
+                "\nCategory: " + category +
+                "\nCrop: " + crop +
+                "\n next Chest: " + next;
+    }
 }

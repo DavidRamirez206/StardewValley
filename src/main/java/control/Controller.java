@@ -15,6 +15,22 @@ public class Controller {
     }
 
     private void addChest(Chest chest){
-        this.first = chest;
+        if(first == null){
+            this.first = chest;
+        } else {
+            if (first.getNext() == null) {
+                first.setNext(chest);
+            } else {
+                Chest current = first.getNext();
+                while (current.getNext() != null) {
+                    current = current.getNext();
+                }
+                current.setNext(chest);
+            }
+        }
+    }
+
+    public String chestInfo(){
+        return this.first.toString();
     }
 }
