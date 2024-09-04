@@ -1,0 +1,51 @@
+package structures;
+
+import model.Crop;
+
+public class SimpleLinkedListCrop {
+    private NodeCrop first;
+
+    public SimpleLinkedListCrop() {
+        this.first = null;
+    }
+
+    public void add(String name, String cropType, int growthTime, Crop crop){
+        NodeCrop node = new NodeCrop(name, cropType, growthTime, crop);
+
+        if (first == null){
+            first = node;
+        } else {
+            if (first.getNext() == null){
+                first.setNext(node);
+            } else {
+                NodeCrop current = first;
+                while (current.getNext() != null){
+                    current = current.getNext();
+                }
+                current.setNext(node);
+            }
+        }
+    }
+
+    public NodeCrop search(String name){
+
+        NodeCrop nodeFound = null;
+        if (first != null && first.getName().equals(name)){
+            nodeFound = first;
+        } else {
+            NodeCrop current = first;
+            while (current.getNext() != null && !current.getName().equals(name)){
+                if (current.getName().equals(name)){
+                    nodeFound = current;
+                    break;
+                }
+                current = current.getNext();
+            }
+        }
+        return nodeFound;
+    }
+
+    public NodeCrop getFirst(){
+        return first;
+    }
+}
