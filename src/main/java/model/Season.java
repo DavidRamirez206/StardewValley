@@ -3,6 +3,7 @@ package model;
 public enum Season {
     SPRING,
     SUMMER,
-    AUTUMN,
-    WINTER;
+    FALL,
+    WINTER,
+    ANY_SEASON;
 }

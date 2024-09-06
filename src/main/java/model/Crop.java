@@ -3,13 +3,11 @@ package model;
 public abstract class Crop {
     protected String name;
     protected Season season;
-    protected State state;
     protected int growthTime;
     
-    public Crop(String name, Season season, State state, int growthTime) {
+    public Crop(String name, int optioSeason, int growthTime) {
         this.name = name;
-        this.season = season;
-        this.state = state;
+        setSeason(Season.values()[optioSeason - 1]);
         this.growthTime = growthTime;
     }
     public Crop() {
@@ -21,9 +19,6 @@ public abstract class Crop {
     public Season getSeason() {
         return season;
     }
-    public State getState() {
-        return state;
-    }
     public int getGrowthTime() {
         return growthTime;
     }
@@ -32,9 +27,6 @@ public abstract class Crop {
     }
     public void setSeason(Season season) {
         this.season = season;
-    }
-    public void setState(State state) {
-        this.state = state;
     }
     public void setGrowthTime(int growthTime) {
         this.growthTime = growthTime;

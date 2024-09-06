@@ -44,7 +44,26 @@ public class SimpleLinkedListChest {
             }
         }
 
-        return nodeFound;
+        if (nodeFound != null){
+            return nodeFound;
+        } else {
+            throw new NullPointerException("the chest was not found");
+        }
+    }
+
+    public int size(){
+        int size = 0;
+
+        if(first != null){
+            size = 1;
+            
+            NodeChest current = first;
+            while (current.getNext() != null) {
+                size += 1;
+                current = current.getNext();
+            }
+        }
+        return size;
     }
 
     public NodeChest getFirst(){

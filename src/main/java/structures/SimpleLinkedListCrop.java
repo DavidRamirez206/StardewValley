@@ -9,8 +9,8 @@ public class SimpleLinkedListCrop {
         this.first = null;
     }
 
-    public void add(String name, String cropType, int growthTime, Crop crop){
-        NodeCrop node = new NodeCrop(name, cropType, growthTime, crop);
+    public void add(String name, Crop crop){
+        NodeCrop node = new NodeCrop(name, crop);
 
         if (first == null){
             first = node;
@@ -45,7 +45,26 @@ public class SimpleLinkedListCrop {
         return nodeFound;
     }
 
+    public int size(){
+        int size = 0;
+
+        if(first != null){
+            size = 1;
+            
+            NodeCrop current = first;
+            while (current.getNext() != null) {
+                size += 1;
+                current = current.getNext();
+            }
+        }
+        return size;
+    }
+
     public NodeCrop getFirst(){
         return first;
+    }
+
+    public String type(){
+        return first.getTypeCrop();
     }
 }

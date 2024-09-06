@@ -1,7 +1,7 @@
 package model;
 
 public class WinterCrop extends Crop{
-    public WinterCrop(String name, Season season, State state, int growthTime){
-        super();
+    public WinterCrop(String name, int optioSeason, int growthTime){
+        super(name, optioSeason, growthTime);
     }
 }

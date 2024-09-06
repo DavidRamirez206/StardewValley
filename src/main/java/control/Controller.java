@@ -1,36 +1,37 @@
 package control;
 
 import model.*;
+import structures.SimpleLinkedListChest;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Controller {
-    private Chest first;
+    private SimpleLinkedListChest chests;
 
     public Controller(){
+        chests = new SimpleLinkedListChest();
     }
 
-    public void createChest(String numberChest){
-        Chest chest = new Chest(numberChest);
-        
-        addChest(chest);
+    public void createChest(String chestNumber){
+        Chest chest = new Chest(chestNumber);
+        chests.add(chestNumber, chest);
     }
 
-    private void addChest(Chest chest){
-        if(first == null){
-            this.first = chest;
-        } else {
-            if (first.getNext() == null) {
-                first.setNext(chest);
-            } else {
-                Chest current = first.getNext();
-                while (current.getNext() != null) {
-                    current = current.getNext();
-                }
-                current.setNext(chest);
-            }
-        }
+    public Chest searchChest(String id){
+        return chests.search(id).getChest();
     }
 
-    public String chestInfo(){
-        return this.first.toString();
+    public int chestSize(){
+        return chests.size();
     }
+
+    public SimpleLinkedListChest getSimpleLinkedListChest(){
+        return chests;
+    }
+
+    public void createStackToChest(String chestID, String stackID){
+        chests.search(chestID).getChest().createStack(stackID);
+    }
+
 }
