@@ -1,12 +1,15 @@
 package model;
+import Exceptions.*;
 
 public class Chest {
     private String chestNumber;
     private Stack firstStack;
+    private String typeChest;
 
-    public Chest(String chestNumber) {
+    public Chest(String chestNumber, String typeChest) {
         this.chestNumber = chestNumber;
         this.firstStack = null;
+        this.typeChest = typeChest;
     }
 
     public Chest(){
@@ -20,12 +23,20 @@ public class Chest {
         return firstStack;
     }
 
+    public String getTypeChest(){
+        return typeChest;
+    }
+
     public void setChestNumber(String chestNumber) {
         this.chestNumber = chestNumber;
     }
 
     public void setStack(Stack firstStack){
         this.firstStack = firstStack;
+    }
+
+    public void setTypeChest(String typeChest){
+        this.typeChest = typeChest;
     }
 
     public void createStack(String id){
@@ -41,30 +52,23 @@ public class Chest {
         }
     }
 
-    public Stack searchStack(String id){
-        Stack current = null;
-        if(firstStack == null){
-            throw new IllegalArgumentException ("This chest is empty. First create a stack");
-        } else {
-            if (firstStack.getId().equals(id)){
-                current = firstStack;
-            } else {
-                Stack tempStack = firstStack;
-                while (!tempStack.getId().equals(id) || tempStack.getNextStack() != null) {
-                    tempStack = tempStack.getNextStack();
-                    if (tempStack.getId().equals(id)){
-                        current = tempStack;
-                    }
-                }
+    public Stack searchStack(String id) throws StackException {
+        if (firstStack == null) {
+            throw new StackException("This chest is empty. First create a stack.");
+        }
+    
+        Stack tempStack = firstStack;
+        while (tempStack != null) {
+            if (tempStack.getId().equals(id)) {
+                return tempStack;
             }
+            tempStack = tempStack.getNextStack();
         }
-
-        if (current != null) {
-            return current;
-        } else {
-            throw new IllegalArgumentException ("stack not found");
-        }
+    
+        throw new StackException("Stack with ID '" + id + "' not found.");
     }
+    
+    
 
     public int stackSize(){
         int size = 0;
@@ -79,10 +83,6 @@ public class Chest {
             }
         }
         return size;
-    }
-
-    public void addCrop(String name, int optionSeason, int growthTime, String idStack){
-        searchStack(idStack).add(name, optionSeason, growthTime);
     }
 
     @Override

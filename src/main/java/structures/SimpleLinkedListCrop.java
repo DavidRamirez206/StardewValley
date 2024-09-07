@@ -15,15 +15,11 @@ public class SimpleLinkedListCrop {
         if (first == null){
             first = node;
         } else {
-            if (first.getNext() == null){
-                first.setNext(node);
-            } else {
-                NodeCrop current = first;
-                while (current.getNext() != null){
-                    current = current.getNext();
-                }
-                current.setNext(node);
+            NodeCrop current = first;
+            while (current.getNext() != null){
+                current = current.getNext();
             }
+            current.setNext(node);
         }
     }
 
@@ -64,7 +60,10 @@ public class SimpleLinkedListCrop {
         return first;
     }
 
-    public String type(){
-        return first.getTypeCrop();
+    public String type() {
+        if (first == null) {
+            return null;
+        }
+        return first.getName();
     }
 }

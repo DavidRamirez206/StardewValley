@@ -39,10 +39,6 @@ public class NodeCrop {
         this.next = next;
     }
 
-    public String getTypeCrop(){
-        return crop.getName();
-    }
-
     @Override
     public String toString() {
         return "NodeCrop{" +

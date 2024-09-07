@@ -1,5 +1,6 @@
 package structures;
 
+import Exceptions.ChestException;
 import model.Chest;
 
 public class SimpleLinkedListChest {
@@ -16,40 +17,30 @@ public class SimpleLinkedListChest {
         if(first == null){
             first = nodeChest;
         } else {
-            if(first.getNext() == null) {
-                first.setNext(nodeChest);
-            } else {
-                NodeChest current = first;
-                while (current.getNext() != null) {
-                    current = current.getNext();
-                }
-                current.setNext(nodeChest);
-            }
-        }
-    }
-
-    public NodeChest search(String id){
-        NodeChest nodeFound= null;
-
-        if (first != null && first.getId().equals(id)) {
-            nodeFound = first;
-        } else {
             NodeChest current = first;
-            while (current.getNext() != null && !current.getId().equals(id)) {
-                if (current.getNext().getId().equals(id)) {
-                    nodeFound = current;
-                    break;
-                }
+            while (current.getNext() != null) {
                 current = current.getNext();
             }
-        }
-
-        if (nodeFound != null){
-            return nodeFound;
-        } else {
-            throw new NullPointerException("the chest was not found");
+            current.setNext(nodeChest);
         }
     }
+
+    public NodeChest search(String id) throws ChestException {
+        if (first == null) {
+            throw new ChestException("There is no chest. First create one.");
+        }
+    
+        NodeChest current = first;
+        while (current != null) {
+            if (current.getId().equalsIgnoreCase(id)) {
+                return current; 
+            }
+            current = current.getNext();
+        }
+    
+        throw new ChestException("Chest with ID '" + id + "' not found.");
+    }
+    
 
     public int size(){
         int size = 0;
