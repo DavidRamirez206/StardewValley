@@ -1,35 +1,31 @@
 package control;
 
+import java.util.Calendar;
+
 import model.*;
 import structures.SimpleLinkedListChest;
 
 public class Controller {
     private SimpleLinkedListChest chests;
     private Season currentSeason;
-    private Thread seasonChangeThread;
+    private Calendar firstTime;
+    private static final int INTERVAL_MINUTES = 1;
 
     public Controller(){
         chests = new SimpleLinkedListChest();
         this.currentSeason = Season.SPRING;  // Initial season
-        startSeasonChange();
+        this.firstTime = Calendar.getInstance();
 
     }
 
-    private void startSeasonChange() {
-        seasonChangeThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        Thread.sleep(1 * 60 * 1000);  // Wait 1 minute (5 * 60 * 1000 ms)
-                        changeSeason();
-                    } catch (InterruptedException e) {
-                        throw new IllegalArgumentException("Season change interrupted.");
-                    }
-                }
-            }
-        });
-        seasonChangeThread.start();  // Start the thread
+    public void updateStation() {
+        Calendar currenteTime = Calendar.getInstance();
+        long elapsedTime = (currenteTime.getTimeInMillis() - firstTime.getTimeInMillis()) / (1000 * 60);
+
+        if (elapsedTime >= INTERVAL_MINUTES) {
+            changeSeason();
+            firstTime = Calendar.getInstance(); 
+        }
     }
 
     // Method to change to the next season
@@ -46,9 +42,6 @@ public class Controller {
                 break;
             case WINTER:
                 currentSeason = Season.SPRING;
-                break;
-            case ANY_SEASON:
-                currentSeason = Season.ANY_SEASON;
                 break;
         }
     }
@@ -73,13 +66,6 @@ public class Controller {
 
     public Season getCurrentSeason() {
         return currentSeason;
-    }
-
-    // Method to stop the thread (when the program ends)
-    public void stopThread() {
-        if (seasonChangeThread != null && seasonChangeThread.isAlive()) {
-            seasonChangeThread.interrupt();
-        }
     }
 
     public void createChest(String chestNumber){

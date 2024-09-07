@@ -5,5 +5,4 @@ public enum Season {
     SUMMER,
     FALL,
     WINTER,
-    ANY_SEASON;
 }

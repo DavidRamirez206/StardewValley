@@ -22,7 +22,7 @@ public class Main {
     public void run(){
 
         while (!mySwitch) {
-            
+            controller.updateStation();
             int option;
 
             System.out.println("----------------------------------------------------------------------");
@@ -44,7 +44,6 @@ public class Main {
                     System.out.println("\nPress 'Enter' to show the menu based on the current season...");
                     in.nextLine();  // Wait for user input to show the next menu
                     menuBySeason();
-
                     
                     addCropToStack();
                     break;
@@ -63,7 +62,6 @@ public class Main {
     // Method to exit the program
     private void exitProgram() {
         mySwitch = true;  // Set to true to exit the loop
-        controller.stopThread();  // Stop the season change thread
         System.out.println("Exiting the program. Goodbye!");
     }
 
