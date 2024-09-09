@@ -34,7 +34,6 @@ public class Chest {
     public void setStack(Stack firstStack){
         this.firstStack = firstStack;
     }
-
     public void setTypeChest(String typeChest){
         this.typeChest = typeChest;
     }
@@ -67,8 +66,6 @@ public class Chest {
     
         throw new StackException("Stack with ID '" + id + "' not found.");
     }
-    
-    
 
     public int stackSize(){
         int size = 0;

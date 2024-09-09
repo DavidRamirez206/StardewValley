@@ -45,7 +45,7 @@ public class Main {
                 case 2:
                     addStackToChest();
                     break;
-                case 3:                    
+                case 3:
                     addCropToStack();
                     break;
                 case 11:
