@@ -14,6 +14,8 @@ public class Stack {
         nextStack = null;
     }
 
+    public Stack(){}
+
     public SimpleLinkedListCrop getCrops() {
         return crops;
     }

@@ -5,6 +5,8 @@ public class Chest {
     private String chestID;
     private Stack firstStack;
     private String chestType;
+
+    private int size = 0;
     
     private static final int MAX_STACKS = 2;
 
@@ -43,15 +45,17 @@ public class Chest {
     public String createStack(String id){
         Stack stack = new Stack(id);
 
-        if (size() <= MAX_STACKS) {
+        if (size < MAX_STACKS) {
             if(firstStack == null){
                 firstStack = stack;
+                size++;
             } else {
                 Stack currenStack = firstStack;
                 while (currenStack.getNextStack() != null) {
                     currenStack = currenStack.getNextStack();
                 }
                 currenStack.setNextStack(stack);
+                size++;
             }
             return "Stack added successfully to chest: " + chestID;
         } else {
@@ -75,7 +79,7 @@ public class Chest {
         throw new StackException("Stack with ID '" + id + "' not found.");
     }
 
-    public int size(){
+    public int size2(){
         int size = 0;
 
         if(firstStack != null){
