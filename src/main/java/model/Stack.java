@@ -4,13 +4,13 @@ import structures.SimpleLinkedListCrop;
 
 public class Stack {
     private SimpleLinkedListCrop crops;
-    private String id;
+    private String stackID;
 
     private Stack nextStack;
 
-    public Stack(String id){
+    public Stack(String stackID){
         crops = new SimpleLinkedListCrop();
-        this.id = id;
+        this.stackID = stackID;
         nextStack = null;
     }
 
@@ -19,7 +19,7 @@ public class Stack {
     }
 
     public String getId(){
-        return id;
+        return stackID;
     }
 
     public Stack getNextStack() {
@@ -30,8 +30,8 @@ public class Stack {
         this.crops = crops;
     }
 
-    public void setId(String id){
-        this.id = id;
+    public void setId(String stackID){
+        this.stackID = stackID;
     }
 
     public void setNextStack(Stack nextStack) {
@@ -72,7 +72,7 @@ public class Stack {
     @Override
     public String toString(){
         return "Crops: " + crops +
-                "\nID: " + id +
+                "\nID: " + stackID +
                 "\nNext Stack: " + nextStack; 
     }
     

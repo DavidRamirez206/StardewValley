@@ -130,6 +130,8 @@ public class Main {
             typeChest = in.nextLine();
         }
         controller.createChest(chestNumber, typeChest);
+
+        System.out.println("Chest created correctly");
     }
 
     public void addStackToChest(){

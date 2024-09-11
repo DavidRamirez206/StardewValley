@@ -2,21 +2,23 @@ package model;
 import Exceptions.*;
 
 public class Chest {
-    private String chestNumber;
+    private String chestID;
     private Stack firstStack;
-    private String typeChest;
+    private String chestType;
+    
+    private static final int MAX_STACKS = 2;
 
-    public Chest(String chestNumber, String typeChest) {
-        this.chestNumber = chestNumber;
+    public Chest(String chestID, String chestType) {
+        this.chestID = chestID;
         this.firstStack = null;
-        this.typeChest = typeChest;
+        this.chestType = chestType;
     }
 
     public Chest(){
     }
 
     public String getChestNumber() {
-        return chestNumber;
+        return chestID;
     }
 
     public Stack getStack(){
@@ -24,30 +26,36 @@ public class Chest {
     }
 
     public String getTypeChest(){
-        return typeChest;
+        return chestType;
     }
 
-    public void setChestNumber(String chestNumber) {
-        this.chestNumber = chestNumber;
+    public void setChestNumber(String chestID) {
+        this.chestID = chestID;
     }
 
     public void setStack(Stack firstStack){
         this.firstStack = firstStack;
     }
-    public void setTypeChest(String typeChest){
-        this.typeChest = typeChest;
+    public void setTypeChest(String chestType){
+        this.chestType = chestType;
     }
 
-    public void createStack(String id){
+    public String createStack(String id){
         Stack stack = new Stack(id);
-        if(firstStack == null){
-            firstStack = stack;
-        } else {
-            Stack currenStack = firstStack;
-            while (currenStack.getNextStack() != null) {
-                currenStack = currenStack.getNextStack();
+
+        if (size() <= MAX_STACKS) {
+            if(firstStack == null){
+                firstStack = stack;
+            } else {
+                Stack currenStack = firstStack;
+                while (currenStack.getNextStack() != null) {
+                    currenStack = currenStack.getNextStack();
+                }
+                currenStack.setNextStack(stack);
             }
-            currenStack.setNextStack(stack);
+            return "Stack added successfully to chest: " + chestID;
+        } else {
+            return "You cannot add more stacks to this chest.";
         }
     }
 
@@ -67,7 +75,7 @@ public class Chest {
         throw new StackException("Stack with ID '" + id + "' not found.");
     }
 
-    public int stackSize(){
+    public int size(){
         int size = 0;
 
         if(firstStack != null){
@@ -84,7 +92,7 @@ public class Chest {
 
     @Override
     public String toString(){
-        return "chest number: " + chestNumber +
+        return "chest number: " + chestID +
                 "\nStack: " + firstStack;
     }
 

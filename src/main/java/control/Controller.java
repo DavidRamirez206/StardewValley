@@ -67,9 +67,9 @@ public class Controller {
         return currentSeason;
     }
  
-    public void createChest(String chestNumber, String typeChest){
-        Chest chest = new Chest(chestNumber, typeChest);
-        chests.add(chestNumber, chest);
+    public void createChest(String chestID, String typeChest){
+        Chest chest = new Chest(chestID, typeChest);
+        chests.add(chestID, chest);
     }
 
     public int chestSize(){
@@ -83,13 +83,7 @@ public class Controller {
     public String createStackToChest(String chestID, String stackID) {
         try {
             Chest chest = chests.search(chestID).getChest();
-    
-            if (chest.stackSize() <= 50) { 
-                chest.createStack(stackID);
-                return "Stack added successfully to chest: " + chestID;
-            } else {
-                return "You cannot add more stacks to this chest.";
-            }
+            return chest.createStack(stackID);
         } catch (ChestException se) {
             return "Error: " + se.getMessage();
         }
@@ -97,9 +91,9 @@ public class Controller {
     
     
 
-    public String addCropToStack(String chestNumber, String stackId, String cropName, int seasonOption, int growthTime) {
+    public String addCropToStack(String chestID, String stackId, String cropName, int seasonOption, int growthTime) {
         try {
-            Chest chest = chests.search(chestNumber).getChest();    
+            Chest chest = chests.search(chestID).getChest();    
             Stack stack = chest.searchStack(stackId);
             int size = stack.getCrops().size();
     
