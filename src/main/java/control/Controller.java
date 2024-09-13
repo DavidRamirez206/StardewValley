@@ -20,8 +20,8 @@ public class Controller {
     }
 
     public void updateStation() {
-        Calendar currenteTime = Calendar.getInstance();
-        long elapsedTime = (currenteTime.getTimeInMillis() - firstTime.getTimeInMillis()) / (1000 * 60);
+        Calendar currentTime = Calendar.getInstance();
+        long elapsedTime = (currentTime.getTimeInMillis() - firstTime.getTimeInMillis()) / (1000 * 60);
 
         if (elapsedTime >= INTERVAL_MINUTES) {
             changeSeason();
@@ -102,22 +102,18 @@ public class Controller {
 
             if(chesType.equalsIgnoreCase("GENERAL")){
                 if(stackType == null){
-                    stack.add(cropName, seasonOption, growthTime);
-                    return "Crop added successfully to stack: " + stackId;
+                    return  stack.add(cropName, seasonOption, growthTime);
                 } else if(stackType.equalsIgnoreCase(cropName) && size <= 25){
-                    stack.add(cropName, seasonOption, growthTime);
-                    return "Crop added successfully to stack: " + stackId;
+                    return stack.add(cropName, seasonOption, growthTime);
                 }
             } else {
                 if(stackType == null){
                     if(chesType.equalsIgnoreCase(cropName)){
-                        stack.add(cropName, seasonOption, growthTime);
-                        return "Crop added successfully to stack: " + stackId;
+                        return stack.add(cropName, seasonOption, growthTime);
                     }
                 } else {
                     if(chesType.equalsIgnoreCase(cropName) && size <= 25){
-                        stack.add(cropName, seasonOption, growthTime);
-                        return "Crop added successfully to stack: " + stackId;
+                        return stack.add(cropName, seasonOption, growthTime);
                     }
                 }
             }
@@ -125,10 +121,8 @@ public class Controller {
             return "You cannot add this crop to this stack: You have attempted to add a crop of a different type or the stack is full. " +
                     "\nIf the chest is of only one type, remember that you can only add crops of that same type.";
     
-        } catch (ChestException ce) {
+        } catch (ChestException | StackException ce) {
             return "Error: " + ce.getMessage();
-        } catch (StackException se) {
-            return "Error: " + se.getMessage();
         }
     }
 

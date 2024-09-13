@@ -1,13 +1,13 @@
 package model;
 
-public abstract class Crop {
+public class Crop {
     protected String name;
     protected Season season;
     protected int growthTime;
     
-    public Crop(String name, int optioSeason, int growthTime) {
+    public Crop(String name, int optionSeason, int growthTime) {
         this.name = name;
-        setSeason(Season.values()[optioSeason - 1]);
+        setSeason(Season.values()[optionSeason - 1]);
         this.growthTime = growthTime;
     }
     public Crop() {

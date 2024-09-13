@@ -1,17 +1,21 @@
 package model;
 
+import Exceptions.StackException;
 import structures.SimpleLinkedListCrop;
 
 public class Stack {
     private SimpleLinkedListCrop crops;
     private String stackID;
-
     private Stack nextStack;
+
+    private int size;
+    private static final int MAX_CROPS = 2;
 
     public Stack(String stackID){
         crops = new SimpleLinkedListCrop();
         this.stackID = stackID;
         nextStack = null;
+        size = 0;
     }
 
     public Stack(){}
@@ -28,6 +32,10 @@ public class Stack {
         return nextStack;
     }
 
+    public int getSize(){
+        return size;
+    }
+
     public void setCrops(SimpleLinkedListCrop crops) {
         this.crops = crops;
     }
@@ -40,32 +48,31 @@ public class Stack {
         this.nextStack = nextStack;
     }
 
-
-    public void add(String name, int optionSeason, int growthTime) {
-        Crop crop;
-    
-        switch (optionSeason) {
-            case 1: // Spring
-                crop = new SpringCrop(name, optionSeason, growthTime);
-                break;
-            case 2: // Summer
-                crop = new SummerCrop(name, optionSeason, growthTime);
-                break;
-            case 3: // Fall
-                crop = new FallCrop(name, optionSeason, growthTime);
-                break;
-            case 4: // Winter
-                crop = new WinterCrop(name, optionSeason, growthTime);
-                break;
-            case 5: //Other
-                crop = new OtherCrop(name, optionSeason, growthTime);
-            default:
-                // 
-                throw new IllegalArgumentException("Invalid season option: " + optionSeason);
-        }
-
-        crops.add(name, crop);
+    public void setSize(int size){
+        this.size = size;
     }
+
+
+    public String add(String name, int optionSeason, int growthTime) {
+        Crop crop = new Crop(name, optionSeason, growthTime);
+
+        if(size < MAX_CROPS ){
+            if(stackType() == null){
+                crops.add(name, crop);
+                size++;
+            } else {
+                if(stackType().equalsIgnoreCase(name)){
+                    crops.add(name, crop);
+                    size++;
+                }
+            }
+            return "Crop added";
+        } else {
+            return "Stack is full";
+        }
+    }
+
+
 
     public String stackType(){
         return crops.type();
