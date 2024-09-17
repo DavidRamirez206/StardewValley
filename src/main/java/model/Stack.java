@@ -8,8 +8,8 @@ public class Stack {
     private String stackID;
     private Stack nextStack;
 
-    private int size;
-    private static final int MAX_CROPS = 2;
+    private int size = 0;
+    private static final int MAX_CROPS = 3;
 
     public Stack(String stackID){
         crops = new SimpleLinkedListCrop();
@@ -60,29 +60,34 @@ public class Stack {
             if(stackType() == null){
                 crops.add(name, crop);
                 size++;
+                return "Crop added successfully to stack";
             } else {
                 if(stackType().equalsIgnoreCase(name)){
                     crops.add(name, crop);
                     size++;
+                    return "Crop added successfully to stack";
+                } else {
+                    return "The crop you want to add is a different type. cannot be added";
                 }
             }
-            return "Crop added";
         } else {
             return "Stack is full";
         }
     }
 
-
-
+    public Crop searchCrop(String name) {
+        return crops.search(name).getCrop();
+    }
     public String stackType(){
         return crops.type();
     }
 
     @Override
     public String toString(){
-        return "Crops: " + crops +
+        return "\nCrops: " + crops +
                 "\nID: " + stackID +
-                "\nNext Stack: " + nextStack; 
+                "\nNext Stack: " + nextStack +
+                "\nSize: " + size;
     }
     
 }

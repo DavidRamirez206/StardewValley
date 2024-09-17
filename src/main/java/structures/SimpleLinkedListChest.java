@@ -7,8 +7,19 @@ public class SimpleLinkedListChest {
 
     private NodeChest first;
 
+    private int size;
+
     public SimpleLinkedListChest(){
         this.first = null;
+        this.size = 0;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public void add(String id, Chest chest){
@@ -17,12 +28,19 @@ public class SimpleLinkedListChest {
         if(first == null){
             first = nodeChest;
         } else {
-            NodeChest current = first;
-            while (current.getNext() != null) {
-                current = current.getNext();
+            if(first.getNext() == null){
+                first.setNext(nodeChest);
+                first.getNext().setIndex(size);
+            } else {
+                NodeChest temp = first;
+                while(temp.getNext() != nodeChest){
+                    temp = temp.getNext();
+                }
+                temp.setNext(nodeChest);
+                temp.getNext().setIndex(size);
             }
-            current.setNext(nodeChest);
         }
+        size++;
     }
 
     public NodeChest search(String id) throws ChestException {
@@ -39,22 +57,6 @@ public class SimpleLinkedListChest {
         }
     
         throw new ChestException("Chest with ID '" + id + "' not found.");
-    }
-    
-
-    public int size(){
-        int size = 0;
-
-        if(first != null){
-            size = 1;
-            
-            NodeChest current = first;
-            while (current.getNext() != null) {
-                size += 1;
-                current = current.getNext();
-            }
-        }
-        return size;
     }
 
     public NodeChest getFirst(){

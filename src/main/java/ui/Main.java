@@ -48,6 +48,9 @@ public class Main {
                 case 3:
                     addCropToStack();
                     break;
+                case 4:
+                    sortingChest();
+                    break;
                 case 11:
                     testCase();
                     break;
@@ -144,6 +147,8 @@ public class Main {
         System.out.println(controller.createStackToChest(chestNumber, idStack));
     }
 
+    //
+
     public void addCropToStack(){
         System.out.println("Enter the chestNumber, please");
         String chestNumber = in.nextLine();
@@ -175,9 +180,12 @@ public class Main {
         System.out.println(controller.addCropToStack(chestNumber, idStack, cropName, seasonOption, growthTime));
     }
 
-    public void searchChest(){
-        //System.out.println(controller.searchChest("01"));
-        System.out.println(controller.chestSize());
+    public void sortingChest(){
+        System.out.println("How do you want to organize the chests? \n1. Name of crops \n2. Type of cultivation \n3. Days of growth");
+        int sortOption = in.nextInt();
+        in.nextLine();
+        controller.sortingChest(sortOption);
+        System.out.println("Chest sorted correctly");
     }
 
     public void testCase(){

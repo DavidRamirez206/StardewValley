@@ -41,7 +41,9 @@ public class ChestTest {
         //Act
         chest1.createStack("03"); //Unaded stack
 
+        //Assert
         Stack stack = new Stack("03");
         assertEquals(stack.getId(), chest1.searchStack("03").getId());
     }
+
 }

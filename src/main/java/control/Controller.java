@@ -62,7 +62,6 @@ public class Controller {
         return season;
     }
 
-
     public Season getCurrentSeason() {
         return currentSeason;
     }
@@ -70,10 +69,6 @@ public class Controller {
     public void createChest(String chestID, String typeChest){
         Chest chest = new Chest(chestID, typeChest);
         chests.add(chestID, chest);
-    }
-
-    public int chestSize(){
-        return chests.size();
     }
 
     public SimpleLinkedListChest getSimpleLinkedListChest(){
@@ -88,42 +83,50 @@ public class Controller {
             return "Error: " + se.getMessage();
         }
     }
-    
-    
 
-    public String addCropToStack(String chestID, String stackId, String cropName, int seasonOption, int growthTime) {
+    public String addCropToStack(String chestNumber, String stackId, String cropName, int seasonOption, int growthTime) {
         try {
-            Chest chest = chests.search(chestID).getChest();    
+            Chest chest = chests.search(chestNumber).getChest();
             Stack stack = chest.searchStack(stackId);
-            int size = stack.getCrops().size();
-    
-            String stackType = stack.stackType();
             String chesType = chest.getTypeChest();
 
             if(chesType.equalsIgnoreCase("GENERAL")){
-                if(stackType == null){
-                    return  stack.add(cropName, seasonOption, growthTime);
-                } else if(stackType.equalsIgnoreCase(cropName) && size <= 25){
-                    return stack.add(cropName, seasonOption, growthTime);
-                }
-            } else {
-                if(stackType == null){
-                    if(chesType.equalsIgnoreCase(cropName)){
-                        return stack.add(cropName, seasonOption, growthTime);
-                    }
-                } else {
-                    if(chesType.equalsIgnoreCase(cropName) && size <= 25){
-                        return stack.add(cropName, seasonOption, growthTime);
-                    }
-                }
-            }
+                return stack.add(cropName, seasonOption, growthTime);
+            } else if(chesType.equalsIgnoreCase(cropName)){
 
-            return "You cannot add this crop to this stack: You have attempted to add a crop of a different type or the stack is full. " +
-                    "\nIf the chest is of only one type, remember that you can only add crops of that same type.";
-    
-        } catch (ChestException | StackException ce) {
+                return stack.add(cropName, seasonOption, growthTime);
+            } else {
+                return "You are trying to add a different crop to a specific crop chest. The type of chest and the crop are different";
+            }
+        } catch (ChestException ce) {
             return "Error: " + ce.getMessage();
+        } catch (StackException se) {
+            return "Error: " + se.getMessage();
         }
     }
 
+    public void sortingChest(int sortOption){
+        switch (sortOption){
+            case 1:
+                sortingChestByName();
+                break;
+            case 2:
+                sortingChestByType();
+                break;
+            case 3:
+                sortingChestByGrowthTime();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void sortingChestByName(){
+    }
+
+    public void sortingChestByType(){
+    }
+
+    public void sortingChestByGrowthTime(){
+    }
 }

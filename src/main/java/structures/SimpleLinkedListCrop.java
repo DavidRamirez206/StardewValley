@@ -4,9 +4,11 @@ import model.Crop;
 
 public class SimpleLinkedListCrop {
     private NodeCrop first;
+    private int size;
 
     public SimpleLinkedListCrop() {
         this.first = null;
+        this.size = 0;
     }
 
     public void add(String name, Crop crop){
@@ -15,12 +17,19 @@ public class SimpleLinkedListCrop {
         if (first == null){
             first = node;
         } else {
-            NodeCrop current = first;
-            while (current.getNext() != null){
-                current = current.getNext();
+            if(first.getNext() == null){
+                first.setNext(node);
+                first.getNext().setIndex(size);
+            } else {
+                NodeCrop current = first;
+                while (current.getNext() != null){
+                    current = current.getNext();
+                }
+                current.setNext(node);
+                current.setIndex(size);
             }
-            current.setNext(node);
         }
+        size++;
     }
 
     public NodeCrop search(String name){

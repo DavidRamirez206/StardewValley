@@ -48,16 +48,19 @@ public class Chest {
         if (size < MAX_STACKS) {
             if(firstStack == null){
                 firstStack = stack;
-                size++;
             } else {
-                Stack currenStack = firstStack;
-                while (currenStack.getNextStack() != null) {
-                    currenStack = currenStack.getNextStack();
+                if(firstStack.getNextStack() == null){
+                    firstStack.setNextStack(stack);
+                } else {
+                    Stack currenStack = firstStack.getNextStack();
+                    while (currenStack.getNextStack() != null) {
+                        currenStack = currenStack.getNextStack();
+                    }
+                    currenStack.setNextStack(stack);
                 }
-                currenStack.setNextStack(stack);
-                size++;
             }
-            return "Stack added successfully to chest: " + chestID;
+            this.size++;
+            return "Stack added successfully to chest";
         } else {
             return "You cannot add more stacks to this chest.";
         }
@@ -67,7 +70,10 @@ public class Chest {
         if (firstStack == null) {
             throw new StackException("This chest is empty. First create a stack.");
         }
-    
+
+        if(firstStack.getId().equalsIgnoreCase(id)){
+            return firstStack;
+        }
         Stack tempStack = firstStack;
         while (tempStack != null) {
             if (tempStack.getId().equals(id)) {
@@ -79,25 +85,12 @@ public class Chest {
         throw new StackException("Stack with ID '" + id + "' not found.");
     }
 
-    public int size2(){
-        int size = 0;
-
-        if(firstStack != null){
-            size = 1;
-            
-            Stack current = firstStack;
-            while (current.getNextStack() != null) {
-                size += 1;
-                current = current.getNextStack();
-            }
-        }
-        return size;
-    }
-
     @Override
     public String toString(){
-        return "chest number: " + chestID +
-                "\nStack: " + firstStack;
+        return "\nChest number: " + chestID +
+                "\nStack: " + firstStack +
+                "\nType: " + chestType +
+                "\nSize: " + size;
     }
 
 }

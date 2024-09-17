@@ -6,6 +6,7 @@ public class NodeCrop {
 
     private String name;
     private Crop crop;
+    private int index;
 
     private NodeCrop next;
 
@@ -13,6 +14,7 @@ public class NodeCrop {
         this.name = name;
         this.crop = crop;
         this.next = null;
+        this.index = 0;
     }
 
     public String getName() {
@@ -27,6 +29,11 @@ public class NodeCrop {
         return next;
     }
 
+
+    public int getIndex() {
+        return index;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -37,6 +44,10 @@ public class NodeCrop {
 
     public void setNext(NodeCrop next) {
         this.next = next;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     public String getTypeCrop(){

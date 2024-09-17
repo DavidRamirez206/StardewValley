@@ -31,6 +31,4 @@ public class Crop {
     public void setGrowthTime(int growthTime) {
         this.growthTime = growthTime;
     }
-
-    
 }
