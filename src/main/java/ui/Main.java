@@ -147,8 +147,6 @@ public class Main {
         System.out.println(controller.createStackToChest(chestNumber, idStack));
     }
 
-    //
-
     public void addCropToStack(){
         System.out.println("Enter the chestNumber, please");
         String chestNumber = in.nextLine();
@@ -184,17 +182,17 @@ public class Main {
         System.out.println("How do you want to organize the chests? \n1. Name of crops \n2. Type of cultivation \n3. Days of growth");
         int sortOption = in.nextInt();
         in.nextLine();
-        controller.sortingChest(sortOption);
-        System.out.println("Chest sorted correctly");
+        System.out.println(controller.sortingChest(sortOption));
+        //System.out.println("Chest sorted correctly");
     }
 
     public void testCase(){
-        controller.createChest("01", "ajo");
+        controller.createChest("01", "GENERAL");
         System.out.println(controller.createStackToChest("01", "01"));
-        System.out.println(controller.addCropToStack("01", "01", "ajo", 1, 12));
-        System.out.println(controller.addCropToStack("01", "01", "Garlic", 1, 28));
-        controller.createChest("02","...");
-        controller.createChest("03", "...");
-        controller.createChest("04", "...");
+        System.out.println(controller.createStackToChest("01", "02"));
+        System.out.println(controller.createStackToChest("01", "03"));
+        System.out.println(controller.addCropToStack("01", "01", "B", 1, 12));
+        System.out.println(controller.addCropToStack("01", "02", "C", 1, 20));
+        System.out.println(controller.addCropToStack("01", "03", "A", 1, 28));
     }
 }

@@ -71,8 +71,12 @@ public class Controller {
         chests.add(chestID, chest);
     }
 
-    public SimpleLinkedListChest getSimpleLinkedListChest(){
+    public SimpleLinkedListChest getChest(){
         return chests;
+    }
+
+    private void setChests(SimpleLinkedListChest chests){
+        this.chests = chests;
     }
 
     public String createStackToChest(String chestID, String stackID) {
@@ -105,28 +109,18 @@ public class Controller {
         }
     }
 
-    public void sortingChest(int sortOption){
-        switch (sortOption){
-            case 1:
-                sortingChestByName();
-                break;
-            case 2:
-                sortingChestByType();
-                break;
-            case 3:
-                sortingChestByGrowthTime();
-                break;
-            default:
-                break;
-        }
+    public String sortingChest(int sortOption){
+        chests.getFirst().getChest().sortingChestByOption(sortOption);
+        return chests.getFirst().getChest().toString();
     }
 
-    public void sortingChestByName(){
+    private void sortingChestByName(){
+
     }
 
-    public void sortingChestByType(){
+    private void sortingChestByType(){
     }
 
-    public void sortingChestByGrowthTime(){
+    private void sortingChestByGrowthTime(){
     }
 }
